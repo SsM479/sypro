@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../js/jquery-easyui-1.8.1/themes/black/easyui.css" />
+	<link rel="stylesheet" href="../js/jquery-easyui-1.8.1/themes/icon.css"/>
+</head>
+<body>
+	<div id="loginAndRegDialog" title="用户登录" style="width:250px;height:250px">
+		<form id="loginInputForm" method="post" action="">
+			<table>
+				<tr>
+					<th align="right">用户名</th>
+					<td><input id="name" name="name" class="easyui-validatebox" required="true" /></td>
+				</tr>
+				<tr>
+					<th align="right">密码</th>
+					<td><input id="pwd" name="password" type="password"  class="easyui-validatebox" required="true"/></td>
+				</tr>
+				<tr>
+					<th align="right">重复密码</th>
+					<td><input id="eqPwd" name="eqPwd" type="password"  class="easyui-validatebox" required="true" validType="eqPwd['#loginInputForm input[name=password]']"/></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../jslib/syUtil.js"></script>
+<script type="text/javascript">
+	var loginAndRegDialog;
+	var loginInputForm = $('#loginInputForm');
+	var name = $('#name').val();
+	var pwd = $('#pwd').val();
+	
+	$(function(){
+		loginAndRegDialog = $('#loginAndRegDialog').dialog({
+			closable : false, //将dialog的关闭按钮去掉
+			modal : true,
+			buttons : [
+				{
+					text : '注册', 
+					handler : function(){
+						//弹出警告窗口
+						$.messager.alert('Warning', 'The warning message');
+					}
+				}, 
+				{
+					text : '登录', 
+					handler : function(){
+						//console.info('我点击了登录按钮.')
+						/* 
+							//这样才会在使用ajax的同时可以进行validate判断，否则不调用validate
+							if($('#loginInputForm').form('validate')){
+								$.ajax({
+									url : "../userController/login",
+									data : {
+										roleNames:$('#loginInputForm input[name=name]').val(), 
+										roleIds:$('#loginInputForm input[name=password]').val()
+									},
+									data : $('#loginInputForm').serialize(),
+									cache : false,
+									dataType : "json",
+									success : function(r){
+										//console.info(r.msg);
+									}
+								}); */
+								
+								//关闭窗口
+								//loginAndRegDialog.dialog('close');
+								//消息窗
+								/* $.messager.show({
+									title : '提示',
+									msg : $('#name').val() + "       " + $('#pwd').val()
+								}); 
+							}
+						*/
+						
+						loginInputForm.submit();
+					} 
+					
+				}
+			]
+		});
+		
+		loginInputForm.find('input').on('keyup', function(event){
+			if(event.keyCode == '13'){
+				loginInputForm.submit();
+			}
+		})
+		
+		
+		
+		//form表单会与validate自动调用
+		loginInputForm.form({
+			url : '',
+			success : function(){
+				/*
+					r = eval("("+ r +")");  将字符串r转换成对象r
+					r = $.parseJSON(r);  将json字符串转换为json对象
+				*/
+				if(name=="ssm"){
+					loginAndRegDialog.dialog('close');
+					//消息窗
+					$.messager.show({
+						title : '提示',
+						msg : $('#name').val() + "       " + $('#pwd').val()
+					});
+				}else{
+					$.messager.alert('失败', "账号或密码错误");
+				}
+				
+			}
+		});
+		
+		
+		
+	})
+</script>
+</html>

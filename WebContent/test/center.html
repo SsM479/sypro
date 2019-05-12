@@ -1,0 +1,110 @@
+<body>
+	<script type="text/javascript">
+var datagrid;
+$(function(){
+	$('#admin_user_datagrid').datagrid({
+		url : '../userController/datagrid.action',
+		title : '用户列表',
+		iconCls : 'icon-save',
+		pagination : true, //分页工具条
+		pageSize : 10,
+		pageList : [10, 20, 30, 40],
+		fit : true,
+		fitColumns : true,
+		nowarp : false,
+		border : false,
+		idField : 'id ',
+		sortName : 'name',
+		sortOrder : 'desc',
+		columns : [[{
+			title : 'ID',
+			field : 'id',
+			width : 300
+		},{
+			title : '用户名',
+			field : 'name',
+			width : 300,
+			sortable : true
+		},{
+			title : '密码',
+			field : 'password',
+			width : 300
+		},{
+			title : '创建时间',
+			field : "createdatetime",
+			width : 300
+		},{
+			title : '最后修改时间',
+			field : "modifydatetime",
+			width : 300
+		}]],
+		toolbar : [{
+			text : '增加', 
+			iconCls : 'icon-add', 
+			handler : function(){
+				
+			}
+		},'-',{
+			text : '删除', 
+			iconCls : 'icon-remove', 
+			handler : function(){
+				
+			}
+		},'-',{
+			text : '修改', 
+			iconCls : 'icon-edit', 
+			handler : function(){
+				
+			}
+		}]
+		/* toolbar : '#toolbar' */
+	})
+	
+	/* 过滤查找 */
+	function admin_user_searchFun() {
+		$('#admin_user_datagrid').datagrid('load', serializeObject($('#admin_user_searchForm')));
+	}
+	/* 清空 */
+	function admin_user_cleanFun() {
+		$('#admin_user_searchForm input').val('');
+		$('#admin_user_datagrid').datagrid('load', {});
+	}
+})
+</script>
+
+<div class="easyui-layout" fit="true" border="false">
+	<div region="north" border="false" title="过滤" style="height:150px;overflow:hidden;">
+		<form id="admin_user_searchForm" action="">
+			<table id="admin_yhgl_datagrid" class="tableForm datagrid-toolbar" style="width:100%;height:100%;">
+				<tr>
+					<th>用户名</th>
+					<td><input type="text" name="name" id="" style="width:315px;"/></td>
+				</tr>
+				<tr>
+					<th>创建时间</th>
+					<td>
+						<input type="text" name="createdatetimeStart" class="easyui-datetimebox" editable="false" style="width:155px;" id="" />至
+						<input type="text" name="createdatetimeEnd" class="easyui-datetimebox" editable="false" style="width:155px;" id="" />
+					</td>
+				</tr>
+				<tr>
+					<th>最后修改时间</th>
+					<td>
+						<input type="text" name="modefydatetimeStart" class="easyui-datetimebox" editable="false" style="width:155px;" id="" />至
+						<input type="text" name="modefydatetimeEnd" class="easyui-datetimebox" editable="false" style="width:155px;" id="" />
+						<a href="javascript:void(0);" class="easyui-linkbutton" onclick="admin_user_searchFun()">查询</a>
+						<a href="javascript:void(0);" class="easyui-linkbutton" onclick="admin_user_cleanFun()">清空</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div region="center" border="false">
+		<table id="admin_user_datagrid"></table>
+	</div>
+</div>
+<script type="text/javascript">
+
+</script>
+
+</body>

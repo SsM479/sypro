@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../js/jquery-easyui-1.8.1/themes/black/easyui.css" />
+	<link rel="stylesheet" href="../js/jquery-easyui-1.8.1/themes/icon.css"/>
+	<link rel="stylesheet" href="../style/syCss.css" />
+</head>
+<!-- <body class="easyui-layout">
+	<div region="north" title="North Title" split="true" style="height:100px;">sssmsmsmsmsm</div>
+	<div region="south" title="South Title" split="true" style="height:100px"></div>
+	<div region="east" iconcls="icon-reload" title="East" split="true" style="width:100px;"></div>
+	<div region="west" split="true" title="West" style="width:100px;"></div>
+	<div region="center" iconCls="icon-save" title="center title" style="padding: 5px;background: #eee;" href="center.html"></div>
+</body> -->
+<body id="blayout">
+	<div region="north" title="North Title" split="true" style="height:100px;">gggggggggggg</div>
+	<div region="south" title="South Title" split="true" style="height:100px">
+		<input type="button" value="展开" onclick="cc.layout('collapse','west')" name="" id="" />
+	</div>
+	<div region="east" iconcls="icon-reload" title="East" split="true" style="width:100px;"></div>
+	<div region="west" split="true" title="功能导航" style="width:200px;"></div>
+	<div region="center" iconCls="icon-save" title="欢迎" href="center.html" style="overflow: hidden;"></div>
+	
+</body>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../jslib/syUtil.js"></script>
+<script type="text/javascript">
+	var cc;
+	$(function(){
+		cc = $('#blayout').layout();
+		cc.layout('expand', 'west');
+	})
+	
+	function getCenterPanel(){
+		var centerPanel = $('#blayout').layout('panel','center');
+		console.info(centerPanel.panel('options').title);
+	}
+</script>
+</html>

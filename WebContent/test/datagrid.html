@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../js/jquery-easyui-1.8.1/themes/black/easyui.css" />
+<link rel="stylesheet" href="../js/jquery-easyui-1.8.1/themes/icon.css"/>
+</head>
+<body>
+	<table id="dg"></table>
+</body>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+$('#dg').datagrid({
+    url:'datagrid_data.json',
+    columns:[[
+		{field:'code',title:'Code',width:100},
+		{field:'name',title:'Name',width:100},
+		{field:'price',title:'Price',width:100,align:'right'}
+    ]]
+});
+
+$('#dg').datagrid('load', {
+    name: 'easyui',
+    address: 'ho'
+});
+
+$('#dg').datagrid('reload');
+</script>
+</html>

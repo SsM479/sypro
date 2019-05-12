@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../js/jquery-easyui-1.8.1/themes/black/easyui.css" />
+	<link rel="stylesheet" href="../js/jquery-easyui-1.8.1/themes/icon.css"/>
+</head>
+<body>
+	<!-- SsM479丶
+	<div id="dd" modal="true" style="width:400px;height:200px;">Dialog Content.EASY</div> -->
+	
+	<!-- 图标，可折叠，最小化，最大化，关闭 -->
+	<div id="p" class="easyui-panel" title="My Panel" 
+	style="width:800px;height:150px;padding:10px;background:#1e1717;" 
+	iconcls="icon-save" collapsible="false" minimizable="true" maximizable="true" closable="true" closed="true">
+		<p>panel content.</p>
+		<p>panel content.</p>
+	</div>
+	<input type="button" value="open" onclick="$('#p').panel('open')"/>
+	<input type="button" value="close" onclick="$('#p').panel('close')"/>
+	<input type="button" value="destroy" onclick="$('#p').panel('destroy')"/>
+</body>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/jquery-easyui-1.8.1/locale/easyui-lang-zh_CN.js"></script>
+<!-- <script type="text/javascript" src="../js/jquery-easyui-1.8.1/easyloader.js"></script> -->
+<script type="text/javascript">
+	/* $(function(){
+		$('#dd').dialog({
+			title : 'My Dialog XX'
+		});
+	}); */
+	
+	$(function(){
+		
+	});
+</script>
+</html>
