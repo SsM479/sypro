@@ -1,8 +1,9 @@
 <body>
-	<script type="text/javascript">
-var datagrid;
+<script type="text/javascript">
 $(function(){
-	$('#admin_user_datagrid').datagrid({
+	//admin.user.searchForm = $('admin_user_searchForm').form();
+	editRow = undefined;
+	adminUserDatagrid = $('#admin_user_datagrid').datagrid({
 		url : '../userController/datagrid.action',
 		title : '用户列表',
 		iconCls : 'icon-save',
@@ -24,7 +25,13 @@ $(function(){
 			title : '用户名',
 			field : 'name',
 			width : 300,
-			sortable : true
+			sortable : true,
+			editor : {
+				type : 'validatebox', 
+				options : {
+					required : true
+				}	
+			}
 		},{
 			title : '密码',
 			field : 'password',
@@ -42,6 +49,19 @@ $(function(){
 			text : '增加', 
 			iconCls : 'icon-add', 
 			handler : function(){
+				/* $('#admin_user_datagrid').datagrid('appendRow',{
+					
+				}); */
+				adminUserDatagrid.datagrid('insertRow',{
+					index : 0,
+					row : {
+						
+					}
+				});
+				//var rows = $('#admin_user_datagrid').datagrid('getRows');
+				//console.info(rows.length);
+				//$('#admin_user_datagrid').datagrid('beginEdit', rows.length-1);
+				adminUserDatagrid.datagrid('beginEdit', 0);
 				
 			}
 		},'-',{
@@ -59,19 +79,8 @@ $(function(){
 		}]
 		/* toolbar : '#toolbar' */
 	})
-	
-	/* 过滤查找 */
-	function admin_user_searchFun() {
-		$('#admin_user_datagrid').datagrid('load', serializeObject($('#admin_user_searchForm')));
-	}
-	/* 清空 */
-	function admin_user_cleanFun() {
-		$('#admin_user_searchForm input').val('');
-		$('#admin_user_datagrid').datagrid('load', {});
-	}
 })
 </script>
-
 <div class="easyui-layout" fit="true" border="false">
 	<div region="north" border="false" title="过滤" style="height:150px;overflow:hidden;">
 		<form id="admin_user_searchForm" action="">
@@ -103,8 +112,17 @@ $(function(){
 		<table id="admin_user_datagrid"></table>
 	</div>
 </div>
-<script type="text/javascript">
 
+<script type="text/javascript">
+/* 过滤查找 */
+function admin_user_searchFun() {
+	$('#admin_user_datagrid').datagrid('load', serializeObject($('#admin_user_searchForm')));
+}
+/* 清空 */
+function admin_user_cleanFun() {
+	$('#admin_user_searchForm input').val('');
+	$('#admin_user_datagrid').datagrid('load', {});
+}
 </script>
 
 </body>

@@ -15,7 +15,7 @@
 	<div region="center" iconCls="icon-save" title="center title" style="padding: 5px;background: #eee;" href="center.html"></div>
 </body> -->
 <body id="blayout">
-	<div region="north" title="North Title" split="true" style="height:100px;">gggggggggggg</div>
+	<div region="north" title="North Title" split="true" style="height:100px;"></div>
 	<div region="south" title="South Title" split="true" style="height:100px">
 		<input type="button" value="展开" onclick="cc.layout('collapse','west')" name="" id="" />
 	</div>
@@ -33,6 +33,7 @@
 	$(function(){
 		cc = $('#blayout').layout();
 		cc.layout('expand', 'west');
+		cc.layout('collapse','south');
 	})
 	
 	function getCenterPanel(){

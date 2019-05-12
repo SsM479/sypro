@@ -1,3 +1,5 @@
+var sy = $.extend({}, sy); /* 定义全局变量 */
+
 /**
  * @author 孙宇
  * 
