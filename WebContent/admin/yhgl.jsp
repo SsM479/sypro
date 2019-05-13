@@ -96,6 +96,7 @@
 		$('#admin_yhgl_searchForm input').val('');
 		$('#admin_yhgl_datagrid').datagrid('load', {});
 	}
+	
 	function admin_yhgl_editFun(id) {
 		$('#admin_yhgl_datagrid').datagrid('uncheckAll').datagrid('unselectAll').datagrid('clearSelections');
 		$('<div/>').dialog({
