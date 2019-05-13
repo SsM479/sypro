@@ -180,13 +180,20 @@ $(function(){
 				adminUserDatagrid.datagrid('loadData',[]);
 			}
 		}],
-		
-		
-		
 		/* toolbar : '#toolbar' */
+		//编辑结束后事件
 		onAfterEdit : function(rowIndex, rowData, changes){
+			//插入的变化内容
 			var inserted = adminUserDatagrid.datagrid('getChanges','inserted');
+			//更新的变化内容
 			var updated = adminUserDatagrid.datagrid('getChanges','updated');
+			//在即没有插入也没有修改的情况下不会继续执行，发送空的url
+			if(inserted.length < 1 && updated.length < 1){
+				adminUserEditRow = undefined;
+				adminUserDatagrid.datagrid('unselectAll');
+				return;
+			}
+			
 			var url = '';
 			if(inserted.length > 0){
 				url = '../userController/add.action';//调用添加方法
@@ -194,6 +201,7 @@ $(function(){
 			if(updated.length > 0){
 				url = '../userController/edit.action';//调用更新方法
 			}
+			
 			$.ajax({
 				url : url,
 				data : rowData,
@@ -214,6 +222,7 @@ $(function(){
 			})
 			
 		},
+		//双击事件
 		onDblClickRow : function(rowIndex, rowData){
 			adminUserDatagrid.datagrid('removeEditor','pwd');
 			if(adminUserEditRow != undefined){

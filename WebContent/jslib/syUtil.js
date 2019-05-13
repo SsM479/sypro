@@ -1,8 +1,6 @@
 var sy = $.extend({}, sy); /* 定义全局变量 */
 
 /**
- * @author 孙宇
- * 
  * @requires jQuery,EasyUI
  * 
  * panel关闭时回收内存，主要用于layout使用iframe嵌入网页时的内存泄漏问题
@@ -27,8 +25,6 @@ $.fn.panel.defaults.onBeforeDestroy = function() {
 /**
  * 使panel和datagrid在加载时提示
  * 
- * @author 孙宇
- * 
  * @requires jQuery,EasyUI
  * 
  */
@@ -36,7 +32,6 @@ $.fn.panel.defaults.loadingMessage = '加载中....';
 $.fn.datagrid.defaults.loadMsg = '加载中....';
 
 /**
- * @author 孙宇
  * 
  * @requires jQuery,EasyUI
  * 
@@ -56,7 +51,6 @@ $.fn.combobox.defaults.onLoadError = easyuiErrorFunction;
 $.fn.form.defaults.onLoadError = easyuiErrorFunction;
 
 /**
- * @author 孙宇
  * 
  * @requires jQuery,EasyUI
  * 
@@ -105,7 +99,6 @@ $.fn.datagrid.defaults.onHeaderContextMenu = createGridHeaderContextMenu;
 $.fn.treegrid.defaults.onHeaderContextMenu = createGridHeaderContextMenu;
 
 /**
- * @author 孙宇
  * 
  * @requires jQuery,EasyUI
  * 
@@ -121,7 +114,6 @@ $.extend($.fn.validatebox.defaults.rules, {
 });
 
 /**
- * @author 夏悸
  * 
  * @requires jQuery,EasyUI
  * 
@@ -155,7 +147,6 @@ $.fn.tree.defaults.loadFilter = function(data, parent) {
 };
 
 /**
- * @author 孙宇
  * 
  * @requires jQuery,EasyUI
  * 
@@ -189,7 +180,6 @@ $.fn.treegrid.defaults.loadFilter = function(data, parentId) {
 };
 
 /**
- * @author 孙宇
  * 
  * @requires jQuery,EasyUI
  * 
@@ -198,7 +188,6 @@ $.fn.treegrid.defaults.loadFilter = function(data, parentId) {
 $.fn.combotree.defaults.loadFilter = $.fn.tree.defaults.loadFilter;
 
 /**
- * @author 孙宇
  * 
  * @requires jQuery,EasyUI
  * 
@@ -237,7 +226,6 @@ $.fn.window.defaults.onMove = easyuiPanelOnMove;
 $.fn.panel.defaults.onMove = easyuiPanelOnMove;
 
 /**
- * @author 孙宇
  * 
  * @requires jQuery,EasyUI,jQuery cookie plugin
  * 
@@ -266,7 +254,6 @@ changeTheme = function(themeName) {
 };
 
 /**
- * @author 孙宇
  * 
  * @requires jQuery
  * 
@@ -287,7 +274,6 @@ serializeObject = function(form) {
 };
 
 /**
- * @author 孙宇
  * 
  * 增加formatString功能
  * 
@@ -303,11 +289,7 @@ formatString = function(str) {
 };
 
 /**
- * @author 孙宇
- * 
  * 接收一个以逗号分割的字符串，返回List，list里每一项都是一个字符串
- * 
- * @returns list
  */
 stringToList = function(value) {
 	if (value != undefined && value != '') {
@@ -323,10 +305,6 @@ stringToList = function(value) {
 };
 
 /**
- * @author 孙宇
- * 
- * @requires jQuery
- * 
  * 改变jQuery的AJAX默认属性和方法
  */
 $.ajaxSetup({
