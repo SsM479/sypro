@@ -1,8 +1,8 @@
 <body>
 <script type="text/javascript">
 $(function(){
-	//admin.user.searchForm = $('admin_user_searchForm').form();
-	editRow = undefined;
+	adminUserSearchForm = $('admin_user_searchForm').form();
+	adminUserEditRow = undefined;
 	adminUserDatagrid = $('#admin_user_datagrid').datagrid({
 		url : '../userController/datagrid.action',
 		title : '用户列表',
@@ -35,7 +35,13 @@ $(function(){
 		},{
 			title : '密码',
 			field : 'password',
-			width : 300
+			width : 300,
+			editor : {
+				type : 'validatebox', 
+				options : {
+					required : true
+				}	
+			}
 		},{
 			title : '创建时间',
 			field : "createdatetime",
@@ -52,17 +58,27 @@ $(function(){
 				/* $('#admin_user_datagrid').datagrid('appendRow',{
 					
 				}); */
-				adminUserDatagrid.datagrid('insertRow',{
-					index : 0,
-					row : {
-						
-					}
-				});
 				//var rows = $('#admin_user_datagrid').datagrid('getRows');
 				//console.info(rows.length);
 				//$('#admin_user_datagrid').datagrid('beginEdit', rows.length-1);
-				adminUserDatagrid.datagrid('beginEdit', 0);
+				if(adminUserEditRow != undefined){
+					adminUserDatagrid.datagrid('endEdit',adminUserEditRow);
+				}
 				
+				if(adminUserEditRow == undefined){
+					adminUserDatagrid.datagrid('insertRow',{
+						index : 0,
+						row : {
+							id : generateUUID(),
+							name : '',
+							password : '',
+							createdatetime : formatDate()
+						}
+					});
+					
+					adminUserDatagrid.datagrid('beginEdit', 0);
+					adminUserEditRow = 0;
+				}
 			}
 		},'-',{
 			text : '删除', 
@@ -76,8 +92,38 @@ $(function(){
 			handler : function(){
 				
 			}
-		}]
+		},'-',{
+			text : '保存', 
+			iconCls : 'icon-save', 
+			handler : function(){
+				modifyDateTime = formatDate();
+				adminUserDatagrid.datagrid('endEdit',adminUserEditRow);
+			}
+		},'-',{
+			text : '取消编辑', 
+			iconCls : 'icon-redo', 
+			handler : function(){
+				adminUserEditRow = undefined;
+				adminUserDatagrid.datagrid('rejectChanges');
+				adminUserDatagrid.datagrid('unselectAll');
+			}
+		}],
 		/* toolbar : '#toolbar' */
+		onAfterEdit : function(rowIndex, rowData, changes){
+			console.info(rowData);
+			
+			adminUserEditRow = undefined;
+		},
+		onDblClickRow : function(rowIndex, rowData){
+			if(adminUserEditRow != undefined){
+				adminUserDatagrid.datagrid('endEdit',adminUserEditRow);
+			}
+			
+			if(adminUserEditRow == undefined){
+				adminUserDatagrid.datagrid('beginEdit', rowIndex);
+				adminUserEditRow = rowIndex;
+			}
+		}
 	})
 })
 </script>

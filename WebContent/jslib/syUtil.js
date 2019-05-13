@@ -336,3 +336,63 @@ $.ajaxSetup({
 		$.messager.alert('错误', XMLHttpRequest.responseText);
 	}
 });
+
+/*
+ * 随机生成UUID
+ */
+function generateUUID() { 
+	var d = new Date().getTime(); 
+	if (window.performance && typeof window.performance.now === "function") { 
+		d += performance.now(); //use high-precision timer if available 
+	} 
+	var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) { 
+		var r = (d + Math.random() * 16) % 16 | 0; 
+		d = Math.floor(d / 16); 
+		return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16); 
+	}); 
+	return uuid; 
+}
+
+/*
+ * 生成当前时间 
+ */
+function formatDate() { 
+	var now = new Date();
+    var year=now.getFullYear(); 
+    var month=now.getMonth()+1; 
+    var date=now.getDate(); 
+    var hour=now.getHours(); 
+    var minute=now.getMinutes(); 
+    var second=now.getSeconds(); 
+    return year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second; 
+} 
+
+/*
+ * 扩展DateGrid的databox为datatimebox：可精确到秒
+ * */
+$.extend($.fn.datagrid.defaults.editors, {
+    datatimebox: {
+		init: function(container, options){
+			var editor = $('<input">').appendTo(container);
+			options.editable = false;
+			editor.datatimebox(options);
+			return editor;
+		},
+		destroy: function(target){
+			$(target).datatimebox('destroy');
+		},
+		getValue: function(target){
+			return $(target).datatimebox('getValue');
+		},
+		setValue: function(target, value){
+			$(target).datatimebox('setValue', value);
+		},
+		resize: function(target, width){
+			$(target).datatimebox('resize', width);
+		}
+    }
+});
+
+
+
+
