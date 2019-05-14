@@ -11,14 +11,19 @@ $(function(){
 		pageSize : 10,
 		pageList : [10, 20, 30, 40],
 		fit : true,
-		fitColumns : true,
-		nowarp : false,
+		fitColumns : false,//
+		nowarp : false,//换行显示  true为不换
 		border : false,
 		idField : 'id ',
-		sortName : 'name',
-		sortOrder : 'desc',
-		frozenColumns : [[]],
-		columns : [[{
+		sortName : 'name',//排序列名
+		sortOrder : 'desc', //排序
+		/* rowStyler : function(rowIndex, rowData){ //行样式
+			if(rowData.name == '郭晟葳阳痿'){
+				return '';
+			}
+			return 'background: red';
+		}, */
+		frozenColumns : [[{
 			title : 'ID',
 			field : 'id',
 			width : 100,
@@ -35,7 +40,15 @@ $(function(){
 					required : true
 				}	
 			}
-		},{
+			/* ,styler : function(value, rowData, rowIndex){ //列样式
+				if(rowData.name == '郭晟葳阳痿'){
+					return '';
+				}
+				return 'background: red';
+			}, */
+			/* ,align : 'right' */  //title与内容同时居右
+		}]],
+		columns : [[{
 			title : '密码',
 			field : 'pwd',
 			width : 300,
@@ -44,6 +57,10 @@ $(function(){
 				options : {
 					required : true
 				}	
+			},
+			formatter : function(value,rowData,rowIndex){
+				return '*********';
+				//return '<span title="' + value + '">' + value +'</span>';
 			}
 		},{
 			title : '创建时间',
@@ -52,7 +69,17 @@ $(function(){
 		},{
 			title : '最后修改时间',
 			field : "modifydatetime",
-			width : 300
+			width : 300/* ,
+			formatter : function(v){
+				return new Date(v).format();
+			} */
+		},{
+			title : '控制操作',
+			field : "row",
+			width : 300,
+			formatter : function(value,rowData,rowIndex){
+				return '<button onclick="adminUserCEditor(' + rowIndex + ')">编辑</button><button>删除</button>';
+			}
 		}]],
 		toolbar : [{
 			text : '增加', 
@@ -171,6 +198,17 @@ $(function(){
 			})
 		}
 	})
+	//$('.datagrid-header div').css('textAlign','center'); //title居中
+	
+	
+	
+	/* 控制栏编辑按钮事件 */
+	adminUserCEditor = function(i){
+		console.info(i);
+		var rows = adminUserDatagrid.datagrid('getRows');
+		console.info(rows[i]);
+		adminUserEditor();
+	}
 	
 	/* 添加行时改变editor */
 	adminUserChangeEditorAddrow = function() {

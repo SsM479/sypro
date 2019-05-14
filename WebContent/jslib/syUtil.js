@@ -345,6 +345,47 @@ function formatDate() {
     return year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second; 
 } 
 
+/*  
+ * 长整型格式化时间
+ * */
+Date.prototype.format = function(format){
+	if(isNan(this.getMonth())){
+		return '';
+	}
+	
+	if(!format){
+		format = 'yyyy-MM-dd hh:mm:ss';
+	}
+	
+	var o = {
+		/* month */
+		"M+" : this.getMonth() + 1,
+		/* day */
+		"d+" : this.getDate(),
+		/* hour */
+		"h+" : this.getHours(),
+		/* minute */
+		"m+" : this.getMinutes(),
+		/* second */
+		"s+" : this.getSeconds(),
+		/* quarter */
+		"q+" : Math.floor((this.getMonth() + 3) / 3),
+		/* millisecond */
+		"S" : this.getMilliseconds()
+	};
+	
+	if(/(y+)/.test(format)){
+		format = format.replace(RegExp.$1,(this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	}
+	
+	for(var k in o){
+		if(new RegExp("(" + k + ")").test(formar)){
+			format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+		}
+	}
+	return format;
+}
+
 /*
  * 扩展DateGrid的databox为datatimebox：可精确到秒
  * */
@@ -399,7 +440,27 @@ $.extend($.fn.datagrid.methods,{
 	}
 })
 
-
+/**
+ * 更换主题
+ */
+changeTheme = function(themeName){
+	var $easyuiTheme = $('#easyuiTheme');
+	var url = $easyuiTheme.attr('href');
+	var href = url.substring(0, url.indexOf('themes')) + 'themes/' + themeName + '/easyui.css';
+	$easyuiTheme.attr('href', href);
+	
+	var $iframe = $('iframe');
+	if($iframe.length > 0){
+		for(var i = 0;i < $iframe.length;i++){
+			var ifr = $iframe[i];
+			$(ifr).contents().find('#easyuiTheme').attr('href', href);
+		}
+	}
+	
+	$.cookie('easyuiThemeName', themeName, {
+		expires : 7
+	});
+}
 
 
 
